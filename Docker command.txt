@@ -1,0 +1,74 @@
+1. Docker images::
+   docker images
+2. Docker build
+   
+
+3.Inspect docker image
+  docker image inspect <image_id>
+4. Run container from image
+   docker run -p 8080:8080 accountservice/accounts
+   docker run -p 8082:8080 accountservice/accounts
+5 What are all the containers running
+  docker ps
+6.Check container logs
+  docker logs <container_id>
+7 Follow docker logs
+  docker logs -f <container_id>
+
+8 Stop docker container
+  docker stop <container_id>
+
+9 Again start docker container
+  docker start <container_id> <container_id>
+
+10. Pause the docker container to not take any request
+    docker container pause <container_id>
+
+11 . Inspect container
+    docker container inspect <container_id>
+
+12 Kill docker container
+   docker kill <container_id>
+   (Will kill the container) diffrence between kill and stop is stop command will stop the container gracefully
+
+13 Remove container
+   docker rm <container_id>
+
+14 Run the docker container in detached mode
+   docker run -d -p 8080:8080 accountservice/accounts
+
+::::::::::::::::::::::::::::
+
+15 Command to use to build image using build pack
+   mvn spring-boot:build-image
+
+16 Push local docker image to docker hub
+   Tag docker image before push to match username: 
+   docker login
+   docker tag accountservice/accounts yash1gangrade/accounts
+   docker push yash1gangrade/accounts
+
+::::::::
+Check the version of docker compose
+docker-compose version
+
+Start all microservices using docker compose
+docker-compose up
+docker-compose stop
+
+
+
+:::::::::::::::::::::::::::::::::::::::::
+If using traditional approach to build image using docker file the steps are:
+1.Create jar
+  mvn clean install
+2.Run docker build command
+  docker build . -t accountservice/accounts
+
+
+:::::::: After service discovery
+To build account microservice:Do not runtest
+1. mvn clean install -Dmaven.test.skip=true
+
+To build other microservices
+mvn spring-boot:build-image -Dmaven.test.skip=true

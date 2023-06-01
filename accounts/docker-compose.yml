@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  accounts:
+    image: yash1gangrade/accounts:latest
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - yash1gangrade-network
+
+  loans:
+    image: yash1gangrade/loans:latest
+    mem_limit: 700m
+    ports:
+      - "8090:8090"
+    networks:
+      - yash1gangrade-network
+
+  cards:
+    image: yash1gangrade/cards:latest
+    mem_limit: 700m
+    ports:
+      - "9000:9000"
+    networks:
+      - yash1gangrade-network
+
+networks:
+  yash1gangrade-network:
