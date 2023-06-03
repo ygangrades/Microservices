@@ -3,11 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Microservices.iml" filepath="$PROJECT_DIR$/.idea/Microservices.iml" />
-      <module fileurl="file://$PROJECT_DIR$/accounts/accounts.iml" filepath="$PROJECT_DIR$/accounts/accounts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/configserver/configserver.iml" filepath="$PROJECT_DIR$/configserver/configserver.iml" />
-      <module fileurl="file://$PROJECT_DIR$/department-service/department-service.iml" filepath="$PROJECT_DIR$/department-service/department-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/eurekaserver/eurekaserver.iml" filepath="$PROJECT_DIR$/eurekaserver/eurekaserver.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gatewayserver/gatewayserver.iml" filepath="$PROJECT_DIR$/gatewayserver/gatewayserver.iml" />
     </modules>
   </component>
 </project>

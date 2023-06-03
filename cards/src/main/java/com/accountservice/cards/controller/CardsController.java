@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import com.accountservice.cards.model.Cards;
 import com.accountservice.cards.model.Customer;
 import com.accountservice.cards.repository.CardsRepository;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 public class CardsController {
+    private static final Logger logger = LoggerFactory.getLogger(CardsController.class);
 
     @Autowired
     private CardsRepository cardsRepository;
@@ -25,7 +27,9 @@ public class CardsController {
 
     @PostMapping("/myCards")
     public List<Cards> getCardDetails(@RequestHeader("yashbank-correlation-id") String correlationid, @RequestBody Customer customer) {
+        logger.info("My card details method started");
         List<Cards> cards = cardsRepository.findByCustomerId(customer.getCustomerId());
+        logger.info("My card details method ended");
         if (cards != null) {
             return cards;
         } else {

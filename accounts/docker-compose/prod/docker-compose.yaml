@@ -2,13 +2,27 @@ version: "3.8"
 
 services:
 
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 700m
+    ports:
+      - "9411:9411"
+    networks:
+      - yash1gangrade-network
+
   configserver:
     image: yash1gangrade/configserver:latest
     mem_limit: 700m
     ports:
       - "8071:8071"
+    depends_on:
+      - zipkin
     networks:
       - yash1gangrade-network
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+
 
   eurekaserver:
     image: yash1gangrade/eurekaserver:latest
@@ -28,6 +42,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
   accounts:
     image: yash1gangrade/accounts:latest
@@ -49,6 +64,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
   loans:
     image: yash1gangrade/loans:latest
@@ -70,6 +86,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
   cards:
     image: yash1gangrade/cards:latest
@@ -91,6 +108,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
   gatewayserver:
     image: yash1gangrade/gatewayserver:latest
@@ -115,6 +133,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
 networks:
   yash1gangrade-network:
